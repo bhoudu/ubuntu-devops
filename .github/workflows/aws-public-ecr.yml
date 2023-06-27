@@ -2,7 +2,7 @@ name: Publish Docker image
 on:
   push:
     branches:
-    - main
+    - aws
 jobs:
   aws-public-ecr:
     strategy:
@@ -10,6 +10,7 @@ jobs:
         include:
         - terraform_version: 1.3.3
           terragrunt_version: 0.39.2
+          tag: kinetic
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -32,7 +33,7 @@ jobs:
         REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
         REGISTRY_ALIAS: k2s5i1w6
         REPOSITORY: ubuntu-devops
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: ${{ matrix.tag }}
       run: |
         docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
