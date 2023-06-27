@@ -11,11 +11,9 @@ ENV TZ=Europe/Paris
 
 # Install ubuntu packages
 RUN apt update -y
-RUN apt install -y jq curl wget zip python3 python3-pip git openssh-client openssl tar gzip yarn ansible nodejs
+RUN apt install -y jq curl wget zip python3 python3-pip git tar gzip
 RUN apt clean -y
-
-# Test ansible
-RUN ansible --version
+RUN apt autoremove -y
 
 # Install terraform
 COPY files/terraform_linux_amd64.zip /root/terraform_linux_amd64.zip
@@ -43,12 +41,8 @@ ENTRYPOINT ["/bin/bash"]
 # Test the image before building
 FROM base AS test
 
-RUN node -v && \
-    npm -v && \
-    yarn -v && \
-    terraform -v && \
+RUN terraform -v && \
     terragrunt -v && \
-    ansible --version && \
     aws --version
 
 # Create Image after tests
