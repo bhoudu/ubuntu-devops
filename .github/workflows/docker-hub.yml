@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: yarn install --frozen-lockfile
     - run: sh ./scripts/download.sh files/terraform_linux_amd64.zip https://releases.hashicorp.com/terraform/${{ matrix.terraform_version }}/terraform_${{ matrix.terraform_version }}_linux_amd64.zip
     - run: sh ./scripts/download.sh files/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${{ matrix.terragrunt_version }}/terragrunt_linux_amd64
     - run: sh ./scripts/download.sh files/awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
@@ -22,6 +21,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+    - name: Login to Amazon ECR Public
+      id: login-ecr-public
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        registry-type: public
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
     - name: Build and push
