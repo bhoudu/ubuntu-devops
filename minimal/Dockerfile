@@ -11,9 +11,10 @@ ENV TZ=Europe/Paris
 
 # Install ubuntu packages
 RUN apt update -y
-RUN apt install -y jq curl wget zip python3-minimal git tar gzip
-RUN apt clean -y
+RUN apt install -y --no-install-recommends jq curl wget zip python3-minimal git tar gzip
 RUN apt autoremove -y
+RUN apt purge -y --auto-remove
+RUN apt clean -y
 
 # Install terraform
 COPY files/terraform_linux_amd64.zip /root/terraform_linux_amd64.zip
