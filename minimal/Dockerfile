@@ -11,7 +11,7 @@ ENV TZ=Europe/Paris
 
 # Install ubuntu packages
 RUN apt update -y
-RUN apt install -y --no-install-recommends jq curl wget zip python3-minimal git tar gzip
+RUN apt install -y --no-install-recommends jq curl wget zip unzip python3-minimal git tar gzip
 RUN apt autoremove -y
 RUN apt purge -y --auto-remove
 RUN apt clean -y
