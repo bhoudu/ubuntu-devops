@@ -13,6 +13,7 @@ ENV TZ=Europe/Paris
 RUN apt update -y
 RUN apt install -y jq curl wget zip python3 python3-pip git openssh-client openssl tar gzip yarn ansible nodejs
 RUN apt clean -y
+RUN apt autoremove -y
 
 # Test ansible
 RUN ansible --version
