@@ -6,6 +6,9 @@ ENV TERRAFORM_VERSION $TERRAFORM_VERSION
 ARG TERRAGRUNT_VERSION
 ENV TERRAGRUNT_VERSION $TERRAGRUNT_VERSION
 
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Paris
+
 # Install ubuntu packages
 RUN apt update -y
 RUN apt install -y jq curl wget zip python3 python3-pip git openssh-client openssl tar gzip yarn ansible nodejs
