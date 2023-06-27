@@ -10,7 +10,7 @@ jobs:
         include:
         - terraform_version: 1.3.3
           terragrunt_version: 0.39.2
-          tag: kinetic
+          tag: kinetic-minimal
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -36,6 +36,6 @@ jobs:
           TERRAFORM_VERSION=${{ matrix.terraform_version }}
           TERRAGRUNT_VERSION=${{ matrix.terragrunt_version }}
         context: .
-        file: ./Dockerfile
+        file: ./minimal/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ubuntu-devops:${{ matrix.tag }}
