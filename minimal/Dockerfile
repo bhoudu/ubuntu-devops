@@ -39,7 +39,7 @@ RUN find /usr/local/aws-cli/v2/current/dist/awscli/botocore/data -name examples-
 RUN aws --version
 
 # Entrypoint
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
 
 # Test the image before building
 FROM base AS test
