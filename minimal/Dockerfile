@@ -9,6 +9,9 @@ ENV TERRAGRUNT_VERSION $TERRAGRUNT_VERSION
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Paris
 
+# Change sh to bash
+RUN chsh -s /bin/bash root
+
 # Install ubuntu packages
 RUN apt update -y
 RUN apt install -y --no-install-recommends jq curl wget zip unzip python3-minimal git tar gzip
