@@ -9,8 +9,9 @@ ENV TERRAGRUNT_VERSION $TERRAGRUNT_VERSION
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Paris
 
-# Change sh to bash
-RUN chsh -s /bin/bash root
+# Make /bin/sh symlink to bash instead of dash:
+RUN echo "dash dash/sh boolean false" | debconf-set-selections
+RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 
 # Install ubuntu packages
 RUN apt update -y
