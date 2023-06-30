@@ -12,6 +12,7 @@ ENV TZ=Europe/Paris
 # Make /bin/sh symlink to bash instead of dash:
 RUN echo "dash dash/sh boolean false" | debconf-set-selections
 RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 SHELL ["/bin/bash", "-c"]
 
 # Install ubuntu packages
