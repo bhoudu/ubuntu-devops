@@ -9,6 +9,11 @@ ENV TERRAGRUNT_VERSION $TERRAGRUNT_VERSION
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Paris
 
+# Make /bin/sh symlink to bash instead of dash:
+RUN echo "dash dash/sh boolean false" | debconf-set-selections
+RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
+SHELL ["/bin/bash", "-c"]
+
 # Install ubuntu packages
 RUN apt update -y
 RUN apt install -y --no-install-recommends jq curl wget zip unzip python3 python3-pip git openssh-client openssl tar gzip yarn ansible nodejs
@@ -42,7 +47,7 @@ RUN find /usr/local/aws-cli/v2/current/dist/awscli/botocore/data -name examples-
 RUN aws --version
 
 # Entrypoint
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
 
 # Test the image before building
 FROM base AS test
