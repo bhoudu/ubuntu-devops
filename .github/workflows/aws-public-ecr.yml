@@ -20,10 +20,10 @@ jobs:
       with:
         aws-region: eu-west-3
     - name: Login to Amazon ECR Public
-        id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          registry-type: public
+      id: login-ecr-public
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        registry-type: public
     - run: yarn install --frozen-lockfile
     - run: sh ./scripts/download.sh files/terraform_linux_amd64.zip https://releases.hashicorp.com/terraform/${{ matrix.terraform_version }}/terraform_${{ matrix.terraform_version }}_linux_amd64.zip
     - run: sh ./scripts/download.sh files/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${{ matrix.terragrunt_version }}/terragrunt_linux_amd64
