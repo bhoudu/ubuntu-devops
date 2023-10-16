@@ -16,7 +16,7 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 SHELL ["/bin/bash", "-c"]
 
 # Install ubuntu packages
-RUN apt update -y
+# RUN apt update -y
 RUN apt install -y --no-install-recommends jq curl wget zip unzip python3 python3-pip postgresql postgresql-contrib openssh-client git tar gzip apt-transport-https ca-certificates
 RUN update-ca-certificates
 RUN apt autoremove -y
