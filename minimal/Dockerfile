@@ -1,5 +1,5 @@
 # Build final docker image now that all binaries are OK
-FROM ubuntu:kinetic as base
+FROM ubuntu:jammy as base
 
 ARG TERRAFORM_VERSION
 ENV TERRAFORM_VERSION $TERRAFORM_VERSION
